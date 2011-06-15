@@ -15,7 +15,7 @@ public class PluginLoader {
 	public static void LoadAll(){
 		File PluginsDirectory = new File("plugins");
 		String[] PluginsDirectoryChildren = PluginsDirectory.list();
-		if (PluginsDirectoryChildren == null) {
+		if (PluginsDirectoryChildren == new String[]{null}) {
 			Main.MainLog.info("No 'plugins' directory exists (or is not a directory). No plugins loaded.");
 		} else {
 		    for (int I = 0; I < PluginsDirectoryChildren.length; I++){
@@ -29,11 +29,13 @@ public class PluginLoader {
 	public static boolean LoadIndividualPlugin(String Filename) {
     	try {
         	File PluginFile = new File("plugins/" + Filename);
-        	if (PluginFile.exists()) {
+        	if (!PluginFile.exists()) {
+        		Main.MainLog.warning("Plugin loader was called, but " + Filename + " was not found.");
         		return false;
         	}
         	File PluginInfoFile = new File("plugins/" + Filename.substring(0, Filename.length() - 4) + ".plugininfo");
-        	if (PluginFile.exists()) {
+        	if (!PluginFile.exists()) {
+        		Main.MainLog.warning("Plugin loader was called, but " + "plugins/" + Filename.substring(0, Filename.length() - 4) + ".plugininfo" + " was not found.");
         		return false;
         	}
     		DataInputStream in = new DataInputStream(new FileInputStream(PluginInfoFile));

@@ -14,7 +14,7 @@ public class ConsoleLineHandler extends Thread {
 			Main.ConsoleCommandsLog.info("In: " + Line, false);
 			String[] Split = Line.split(" ");
 			if (Split[0].equalsIgnoreCase("shutdown")) { 
-				System.exit(1);
+				System.exit(0);
 			} else if (Split[0].equalsIgnoreCase("listplugins")) {
 				for (Plugin Plugin : Main.Plugins){
 					PluginInfo Info = Plugin.GetPluginInformation();
